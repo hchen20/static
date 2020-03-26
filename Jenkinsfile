@@ -1,8 +1,12 @@
 pipeline {
 	agent any
 	stages {
-		stage('Build') {
+		stage('Upload to AWS') {
 			steps {
+				withAWS(credentials: 'aws-static', region: 'us-east-1') {
+					echo "Hello AWS"
+				}
+
 				sh 'echo "Hello World"'
 				sh '''
 					echo "Multiline shell steps works too"
